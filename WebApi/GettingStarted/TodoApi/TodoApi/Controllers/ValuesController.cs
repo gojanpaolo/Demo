@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.DirectoryServices.AccountManagement;
-using System.Linq;
 using System.Security.Principal;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,11 +15,17 @@ namespace TodoApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            WindowsIdentity identity = User.Identity as WindowsIdentity;
-            using (var context = new PrincipalContext(ContextType.Domain, "internal.gldd.com"))
-            using (var user = UserPrincipal.FindByIdentity(context, IdentityType.Sid, identity.User.Value))
+            if(User.Identity is WindowsIdentity identity)
             {
-                return new[] { user.Name, user.Description, user.EmailAddress, user.VoiceTelephoneNumber };
+                using (var context = new PrincipalContext(ContextType.Domain, "internal.gldd.com"))
+                using (var user = UserPrincipal.FindByIdentity(context, IdentityType.Sid, identity.User.Value))
+                {
+                    return new[] { user.Name, user.Description, user.EmailAddress, user.VoiceTelephoneNumber };
+                }
+            }
+            else
+            {
+                return new[] { "Unauthorized user" };
             }
         }
 
