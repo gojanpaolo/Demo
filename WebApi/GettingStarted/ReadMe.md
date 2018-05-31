@@ -8,8 +8,6 @@ Follow these steps in Visual Studio:
 
 ## Enable remote access
 
-* Open Properties > launchSettings.json
-* Note port number in "TodoApi" > "applicationUrl"
 * Add `UseUrls` in Program.cs
 * Change startup to TodoApi
 
