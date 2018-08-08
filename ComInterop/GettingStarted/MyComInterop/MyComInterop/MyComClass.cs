@@ -8,6 +8,7 @@ namespace MyComInterop
     [ComVisible(true)]
     public interface IMyComClass
     {
+        [DispId(1)]
         string MyString { get; }
     }
 
