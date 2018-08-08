@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLFOLDER">
+            <Component Id="cmp51226EB5FAB6A5FAD525B6E06729AA16" Guid="*">
+                <File Id="filFBB98A8D93EF354613406548C64FC62B" KeyPath="yes" Source="$(var.ClassLibrary1SourceDir)\ClassLibrary1.tlb">
+                    <TypeLib Id="{408D829B-0919-4B1D-B8DF-999EC3443576}" Description="ClassLibrary1" HelpDirectory="INSTALLFOLDER" Language="0" MajorVersion="1" MinorVersion="0">
+                        <Interface Id="{BA51C14A-52E5-46D5-B4BF-97A65CC52CB5}" Name="IClass1" ProxyStubClassId32="{00020420-0000-0000-C000-000000000046}" />
+                    </TypeLib>
+                </File>
+            </Component>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="ClassLibrary1TLB">
+            <ComponentRef Id="cmp51226EB5FAB6A5FAD525B6E06729AA16" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>

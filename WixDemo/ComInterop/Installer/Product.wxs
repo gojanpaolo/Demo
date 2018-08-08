@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="{76474EEA-98E6-4D15-B456-F3F602F94847}" Version="1.0.0.0" Name="Class Library 1" Language="1033" Manufacturer="Great Lakes Dredge and Dock" UpgradeCode="3D2F0E4C-3FD2-4431-9F3D-9406FAD84C30">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes"/>
+
+		<Feature Id="ProductFeature" Title="Installer" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+    <UIRef Id="GlddUI_Minimal"/>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+        <Directory Id="GLDDFOLDER" Name="Gldd">
+          <Directory Id="INSTALLFOLDER" Name="ClassLibrary1" />
+        </Directory>
+      </Directory>
+    </Directory>
+	</Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <ComponentGroupRef Id="ClassLibrary1DLL"/>
+      <ComponentGroupRef Id="ClassLibrary1TLB"/>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
