@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="{2CD0A415-95DC-4C4D-86E3-E9C24B197346}" Version="1.0.0.0" Name="WPF App 1" Language="1033" Manufacturer="Great Lakes Dredge and Dock" UpgradeCode="8f8f5914-3d69-42ad-98e8-c1cb4880f338">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes"/>
+
+		<Feature Id="ProductFeature" Title="Installer" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+      <ComponentRef Id="CMP_ProgramMenu_WpfApp1EXEShortcut"/>
+      <ComponentRef Id="CMP_Desktop_WpfApp1EXEShortcut"/>
+		</Feature>
+    <UIRef Id="GlddUI_Minimal"/>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+        <Directory Id="GLDDFOLDER" Name="Gldd">
+          <Directory Id="INSTALLFOLDER" Name="WpfApp1" />
+        </Directory>
+      </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ProgramMenuWpfApp1Folder" Name="WPF App 1"/>
+      </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop"/>
+    </Directory>
+	</Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <ComponentGroupRef Id="ProductComponentsFragment"/>
+    </ComponentGroup>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="ProgramMenuWpfApp1Folder">
+      <Component Id="CMP_ProgramMenu_WpfApp1EXEShortcut" Guid="{0ED1482D-E07E-4741-A8CF-667D4ECDF550}">
+        <Shortcut Id="WpfApp1EXEShortcut"
+          Name="WPF App 1"
+          Target="[INSTALLFOLDER]WpfApp1.exe"/>
+        <RemoveFolder Id="RemoveProgramMenuWpfApp1Folder" On="uninstall"/>
+        <RegistryValue Id="REGVAL_ProgramMenu_WpfApp1LNK" Root="HKCU" Key="Software\Gldd\WpfApp1" Name="ProgramMenuShortcut" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+
+  <Fragment>
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="CMP_Desktop_WpfApp1EXEShortcut" Guid="{3EC96EA9-6AC8-4C8B-B1E9-3A7DBD12A15B}">
+        <Shortcut Id="DesktopWpfApp1EXEShortcut"
+          Name="WPF App 1"
+          Target="[INSTALLFOLDER]WpfApp1.exe"/>
+        <RegistryValue Id="REGVAL_Desktop_WpfApp1LNK" Root="HKCU" Key="Software\Gldd\WpfApp1" Name="DesktopShortcut" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+</Wix>
