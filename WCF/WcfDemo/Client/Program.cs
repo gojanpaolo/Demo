@@ -15,8 +15,6 @@ namespace Client
             {
                 while (true)
                 {
-                    var watch = Stopwatch.StartNew();
-
                     IClientChannel channel = null;
                     try
                     {
@@ -43,7 +41,6 @@ namespace Client
                         throw;
                     }
 
-                    Console.WriteLine(watch.ElapsedMilliseconds);
                     Console.ReadLine();
                 }
             }
